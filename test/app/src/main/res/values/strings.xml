@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">test</string>
+    <string name="True">True</string>
+    <string name="False">False</string>
+    <string name="Btn_Next">Next</string>
+    <string name="thongbao_true">Bạn đã chọn đúng!</string>
+    <string name="thongbaos_false">Bạn đã chọn sai!</string>
+
+    <string name="question1">1 + 2 = 3</string>
+    <string name="question2">1 + 1 = 2</string>
+    <string name="question3">3 * 3 = 10</string>
+    <string name="question4">5 * 3 = 15</string>
+    <string name="question5">3 * 8 = 24</string>
+    <string name="question6">2 / 2 = 1</string>
+    <string name="question7">10 + 100 = 110</string>
+    <string name="question8">3 - 3 = 1</string>
+</resources>
