@@ -1,5 +1,6 @@
 package com.example.test;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -25,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     };
 
     private int currentQuestionIndex = 0;
+    private static final String KEY_INDEX = "index";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
 
         Question = findViewById(R.id.question);
         mButtonNext = findViewById(R.id.button_next);
-        updateQuestion();
+
         mButtonNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -61,6 +63,10 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+        if (savedInstanceState != null){
+            currentQuestionIndex = savedInstanceState.getInt(KEY_INDEX,0);
+        }
+        updateQuestion();
     }
 
     private void updateQuestion() {
@@ -75,6 +81,13 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(MainActivity.this, R.string.thongbaos_false, Toast.LENGTH_SHORT).show();
         }
     }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt(KEY_INDEX, currentQuestionIndex);
+    }
+
 }
 
 

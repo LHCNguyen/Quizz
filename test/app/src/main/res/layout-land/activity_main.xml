@@ -9,7 +9,6 @@
         android:id="@+id/question"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="XXXXXXXXXXXXXXXXXXXXXXX"
         android:gravity="center"
         android:textSize="50sp"
         />
@@ -53,13 +52,13 @@
         android:layout_gravity="bottom"
         android:gravity="center">
 
-<!--        <ImageButton-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:padding="20dp"-->
-<!--            android:src="@drawable/ic_baseline_arrow_back_ios_24"-->
-<!--            android:layout_marginRight="10dp"-->
-<!--            />-->
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="20dp"
+            android:background="@drawable/ic_baseline_arrow_back_ios_24"
+            android:layout_marginRight="10dp"
+            />
 
         <Button
             android:id="@+id/button_next"
