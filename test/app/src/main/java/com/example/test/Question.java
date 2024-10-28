@@ -24,4 +24,6 @@ public class Question {
     public void setAnswer(Boolean answer) {
         this.answer = answer;
     }
+
+    public boolean isAnswer(){return answer;}
 }

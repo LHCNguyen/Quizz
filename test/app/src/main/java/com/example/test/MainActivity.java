@@ -3,6 +3,7 @@ package com.example.test;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -13,7 +14,9 @@ public class MainActivity extends AppCompatActivity {
     private Button mButtonTrue;
     private Button mButtonFalse;
     private Button mButtonNext;
+    private Button mCheat;
     private TextView Question;
+
     private Question[] mQuestionBank = new Question[] {
             new Question(R.string.question1, true),
             new Question(R.string.question2, true),
@@ -67,6 +70,18 @@ public class MainActivity extends AppCompatActivity {
             currentQuestionIndex = savedInstanceState.getInt(KEY_INDEX,0);
         }
         updateQuestion();
+
+        mCheat = findViewById(R.id.btn_Cheat);
+        mCheat.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                //Intent i = new Intent(MainActivity.this, CheatActivity.class);
+                boolean answer = mQuestionBank[currentQuestionIndex].getAnswer();
+                Intent i = CheatActivity.newIntent(MainActivity.this, answer);
+                startActivity(i);
+            }
+        });
     }
 
     private void updateQuestion() {
