@@ -17,4 +17,6 @@
     
     <string name="showAnswer">Show Answer</string>
     <string name="cheat">Cheat</string>
+    
+    <string name="toast_cheting">Bạn đang xem kết quả tham khảo</string>
 </resources>

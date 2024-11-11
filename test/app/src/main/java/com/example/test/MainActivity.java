@@ -1,5 +1,11 @@
 package com.example.test;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultCaller;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContract;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -16,6 +22,9 @@ public class MainActivity extends AppCompatActivity {
     private Button mButtonNext;
     private Button mCheat;
     private TextView Question;
+
+    private int mCurrentIndex = 0;
+    private boolean mIsCheat;
 
     private Question[] mQuestionBank = new Question[] {
             new Question(R.string.question1, true),
@@ -79,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
                 //Intent i = new Intent(MainActivity.this, CheatActivity.class);
                 boolean answer = mQuestionBank[currentQuestionIndex].getAnswer();
                 Intent i = CheatActivity.newIntent(MainActivity.this, answer);
-                startActivity(i);
+                starActivity4Result.launch(i);
             }
         });
     }
@@ -88,13 +97,20 @@ public class MainActivity extends AppCompatActivity {
         Question.setText(mQuestionBank[currentQuestionIndex].getQuestion());
     }
 
-    private void checkAnswer(boolean userAnswer) {
-        boolean correctAnswer = mQuestionBank[currentQuestionIndex].getAnswer();
-        if (userAnswer == correctAnswer) {
-            Toast.makeText(MainActivity.this, R.string.thongbao_true,Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(MainActivity.this, R.string.thongbaos_false, Toast.LENGTH_SHORT).show();
+    private void checkAnswer(boolean userPressedTrue) {
+        boolean answerIsTrue = mQuestionBank[mCurrentIndex].isAnswer();
+        int messageResID = 0;
+        if(mIsCheat)
+            messageResID = R.string.toast_cheting;
+        else {
+            if(userPressedTrue == answerIsTrue){
+                messageResID = R.string.thongbao_true;
+            }
+            else{
+                messageResID = R.string.thongbaos_false;
+            }
         }
+        Toast.makeText(this,messageResID,Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -102,6 +118,18 @@ public class MainActivity extends AppCompatActivity {
         super.onSaveInstanceState(outState);
         outState.putInt(KEY_INDEX, currentQuestionIndex);
     }
+
+    ActivityResultLauncher<Intent> starActivity4Result = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult o) {
+                    if(o != null && o.getResultCode() == RESULT_OK)
+                        if (o.getData() != null)
+                            mIsCheat = CheatActivity.getAnswerShow(o.getData());
+                }
+            });
+
 
 }
 
